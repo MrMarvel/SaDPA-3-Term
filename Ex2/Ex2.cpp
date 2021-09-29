@@ -115,7 +115,6 @@ public:
 		int key = getHash(node);
 		if (key < 0 || key >= size) return;
 		Node& tableNode = table[key];
-		tableNode.isFree = true;
 		tableNode.isDeleted = true;
 
 		amountItemsExisting--;
