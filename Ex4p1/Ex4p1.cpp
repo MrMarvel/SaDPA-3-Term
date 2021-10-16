@@ -3,12 +3,20 @@
 
 #include <iostream>
 #include "SearchBinaryTree.h"
+#include <string>
+
+using namespace std;
 
 int main()
 {
-    SearchBinaryTree<int>* sbt = new SearchBinaryTree<int>(5);
+    SearchBinaryTree<string, int>* sbt = new SearchBinaryTree<string, int>(string("s"), 5);
+    sbt->insert("hi", 4);
+    sbt->displayBinTree();
+    cout << sbt->searchValueByKey("s") << endl;
+    sbt->deleteNode("s");
+    sbt->displayBinTree();
     //shared_ptr<SearchBinaryTree<int>> sbt = shared_ptr<SearchBinaryTree<int>>(new SearchBinaryTree<int>(1));
-    std::cout << "Hello World!\n";
+    system("pause");
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
