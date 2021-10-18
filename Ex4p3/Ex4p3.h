@@ -14,5 +14,6 @@ using namespace help1;
 
 const string FILE_DB = "db.txt";
 const string FILE_DB_L = "dbL.txt";
+const string FILE_DB_XL = "dbXL.txt";
 
 int main();

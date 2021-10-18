@@ -156,6 +156,7 @@
   <ItemGroup>
     <Text Include="db.txt" />
     <Text Include="dbL.txt" />
+    <Text Include="dbXL.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -104,6 +104,38 @@ private:
         return curr;
     }
     TreeNode* insert(TreeNode* pasteInto, TreeNode* paste) {
+        //
+        if (!paste) return nullptr;
+        if (!pasteInto) return paste;
+
+        shared_ptr<K> pasteKey, pasteIntoKey;
+        TreeNode* pasteIntoLeft;
+        TreeNode* pasteIntoRight = NULL;
+        while (pasteInto) {
+            pasteKey = paste->key;
+            pasteIntoKey = pasteInto->key;
+            if (*pasteKey < *pasteIntoKey) {
+                pasteIntoLeft = pasteInto->left;
+                if (pasteIntoLeft) {
+                    pasteInto = pasteIntoLeft;
+                    continue;
+                }
+                pasteInto->left = paste;
+                break;
+            }
+            if (*pasteKey > *pasteIntoKey) {
+                pasteIntoRight = pasteInto->right;
+                if (pasteIntoRight) {
+                    pasteInto = pasteIntoRight;
+                    continue;
+                }
+                pasteInto->right = paste;
+                break;
+            }
+            break;
+        }
+        return pasteInto;
+        //
         /* If the tree is empty, return a new node */
         
         if (paste == NULL) return nullptr;
@@ -199,10 +231,10 @@ void SearchBinaryTree<K, T>::displayBinTree(bool show) {
 template<typename K, typename T>
 void SearchBinaryTree<K, T>::printBinTree(TreeNode* node, bool show, long n) {
     if (!node) return;
-    printBinTree(node->right, show, n + 5);
+    if(show)printBinTree(node->right, show, n + 5);
     for (long i = 0; i < n; i++)
         if (show) printf(" ");
     K k = *node->key;
     if (show) cout << k << " = " << *node->data << "\n";
-    printBinTree(node->left, show, n + 5);
+    if(show)printBinTree(node->left, show, n + 5);
 }

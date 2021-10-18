@@ -7,10 +7,20 @@
 int main() {
     setlocale(LC_ALL, "RUS");
     //Fill from file
-    printf("Из какого файла восстановить(0 - db.txt, 1 - dbL.txt)?\n");
+    printf("Из какого файла восстановить(0 - db.txt, 1 - dbL.txt, 2 - dbXL.txt)?\n");
     int typeFile;
     cin >> typeFile;
-    fillFromFile(typeFile == 1 ? FILE_DB_L : FILE_DB);
+    switch (typeFile) {
+    case 1:
+        fillFromFile(FILE_DB_L);
+        break;
+    case 2:
+        fillFromFile(FILE_DB_XL);
+        break;
+    default:
+        fillFromFile(FILE_DB);
+        break;
+    }
     printf("Восстановлено из файла ");
     cout << FILE_DB_L;
     printf("!\n\n");
@@ -54,7 +64,7 @@ int main() {
                 break;
             case 3:
                 printf("Дерево:\n");
-                printTimePrint(typeFile == 1);
+                printTimePrint(typeFile >= 1 && typeFile <= 2);
                 break;
             case 4:
                 printf("Введите значение узла с искомым ключём:\n");
