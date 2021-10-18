@@ -25,4 +25,9 @@
       <UniqueIdentifier>{e0ca459f-c644-41bc-83ae-a9bc42747c3b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="input.txt">
+      <Filter>Файлы ресурсов</Filter>
+    </Text>
+  </ItemGroup>
 </Project>

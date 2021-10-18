@@ -4,15 +4,46 @@
 #include <iostream>
 #include "SearchBinaryTree.h"
 #include <string>
+#include <fstream>
 
 using namespace std;
+SearchBinaryTree<string, int>* sbt = new SearchBinaryTree<string, int>(string("s"), 5);
+class File {
+private:
+    ifstream *ifs = nullptr;
+    void insertAll() {
+        ifstream& in = *ifs;
+        string xs;
+        int x;
+        string line = "";
+        for (int pos = 1; !in.eof() && in.good(); pos++) {
+            in >> xs;
+            if (xs == "") continue;
+            if (!sbt) {
+                sbt = new SearchBinaryTree<string, int>(xs, pos);
+                continue;
+            }
+            sbt->insert(xs, pos);
+        }
+    }
+public:
+    File(string file) {
+        ifs = new ifstream(file);
+        insertAll();
+    }
+};
 
-int main()
-{
-    SearchBinaryTree<string, int>* sbt = new SearchBinaryTree<string, int>(string("s"), 5);
+int main() {
+    setlocale(LC_ALL, "RUS");
+    File f("input.txt");
+    printf("Восстановлено из файла input.txt:\n");
+    sbt->displayBinTree();
+    printf("Вставка {\"hi\" 4}:\n");
     sbt->insert("hi", 4);
     sbt->displayBinTree();
+    printf("Поиск по ключу \"s\":\n");
     cout << sbt->searchValueByKey("s") << endl;
+    printf("Удаление по ключу \"s\":\n");
     sbt->deleteNode("s");
     sbt->displayBinTree();
     //shared_ptr<SearchBinaryTree<int>> sbt = shared_ptr<SearchBinaryTree<int>>(new SearchBinaryTree<int>(1));
