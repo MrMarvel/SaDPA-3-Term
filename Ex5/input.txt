@@ -1,0 +1,7 @@
+a b 3
+a e 1
+b c 5
+b e 4
+c d 2
+e d 7
+e c 6
