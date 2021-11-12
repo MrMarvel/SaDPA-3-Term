@@ -140,10 +140,22 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Ex5.cpp" />
+    <ClCompile Include="Methods.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="input.txt" />
     <Text Include="input2.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Graph.h" />
+    <ClInclude Include="Matrix.h" />
+    <ClInclude Include="Pair.h" />
+    <ClInclude Include="SquareMatrix.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
+    <None Include="ClassDiagram1.cd" />
+    <None Include="ClassDiagram2.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

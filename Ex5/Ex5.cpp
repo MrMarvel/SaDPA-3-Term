@@ -6,39 +6,19 @@
 #include <sstream>
 #include <set>
 #include <map>
+#include "Methods.h"
+#include "Graph.h"
 
 using namespace std;
 
 int p[100000];
 int rk[100000];
 
-vector<vector<int>> Floyd_Warshall(vector<vector<int>> matrix) {
-    auto size = matrix.size();
-    for (int k = 0; k < size; k++) {	//Пробегаемся по всем вершинам и ищем более короткий путь через вершину k
-        for (int i = 0; i < size; i++) {
-            for (int j = 0; j < size; j++) {
-                int sum = matrix[i][k] + matrix[k][j];
-                matrix[i][j] = min(matrix[i][j], sum);	//Новое значение ребра равно минимальному между старым ребром и суммой ребер 
-                if (matrix[i][j] <= 0) matrix[i][j] = sum;
-            }
-        }
-    }
-    return matrix;
-}
 
-void print_matrix(vector<vector<int>> matrix) {	//matrix - матрица смежности
-    for (int i = 0; i < matrix.size(); i++) {
-        for (int j = 0; j < matrix[i].size(); j++) {
-            if (matrix[i][j] == 0) {	//если ячейка равна 101
-                std::cout << "INF" << " ";	//вывести условное обозначение бесконечности
-            }
-            else {	//иначе
-                printf("%3d ", matrix[i][j]);	//вывести значение ячейки матрицы
-            }
-        }
-        std::cout << std::endl;	//делаем перенос строки после заполнения ряда
-    }
-}
+
+
+
+
 
 void init_dsu() {
     for (int i = 0; i < 100000; i++) {
@@ -84,11 +64,14 @@ struct edge {
     }
 };
 
-vector<vector<int>> fillMatrixByEdges(vector<edge> edges) {
+Graph<char, int> fillMatrixByEdges(vector<edge> edges) {
     vector<vector<int>> matrix;
-    
+    Graph<char, int> graph;
     map<char, int> dots;
     for (auto e : edges) {
+        graph.addNode(e.a);
+        graph.addNode(e.b);
+        graph.addEdge(e.a, e.b, e.len);
         bool nfa = dots.find(e.a) == dots.end();
         bool nfb = dots.find(e.b) == dots.end();
         if (nfa) {
@@ -115,15 +98,15 @@ vector<vector<int>> fillMatrixByEdges(vector<edge> edges) {
         //replace(v.begin(), v.end(), 0, INT_MAX/2);
     }
 
-    return matrix;
-}
+    return graph;
+};
 
 int main() {
     setlocale(LC_ALL, "RUS");
     vector<edge> edges = {}; // Список рёбр
     //Ввод edges...
     new ifstream("");
-    shared_ptr<ifstream> fin = shared_ptr<ifstream>(new ifstream("input2.txt"));
+    shared_ptr<ifstream> fin = shared_ptr<ifstream>(new ifstream("input.txt"));
     if (!fin->is_open()) {
         printf("Файл input.txt не найден!\n");
         system("pause");
@@ -131,11 +114,11 @@ int main() {
     }
     istream &in = *fin;
 
-    vector<vector<int>> mat_sm; //Матрица смежности
 
-    while (!in.eof()) {
+    for (bool isEnd = false; !in.eof() && !isEnd;) {
         string line;
         getline(in, line);
+        if (line.back() == ';') isEnd = true;
         istringstream iss = istringstream(line);
         char a, b;
         int x;
@@ -149,6 +132,36 @@ int main() {
         cout << e.a << "-" << e.len << ">" << e.b << endl;
     }
 
+    int choose = 0;
+    while (choose >= 0 && cin.good()) {
+        printf("\nМеню:\n");
+        printf("0. Продолжить вычисления\n");
+        printf("1. Добавить точку\n");
+        in >> choose;
+        switch (choose) {
+        case 1:
+        {
+            printf("FROM   TO    WEIGHT\n");
+            printf("CHAR CHAR NUMERICAL\n");
+            char a, b;
+            int l;
+            in >> a >> b >> l;
+            edge e = { a, b, l };
+            edges.push_back(e);
+            break;
+        }
+        default:
+            choose = -1;
+        }
+    }
+
+    printf("\nДано:\n");
+    for (auto e : edges) {
+        cout << e.a << "-" << e.len << ">" << e.b << endl;
+    }
+
+    Graph<char, int> graph; //Граф
+    graph = fillMatrixByEdges(edges);
     sort(edges.begin(), edges.end());
 
     int mst_weight = 0;
@@ -168,10 +181,14 @@ int main() {
         cout << e.a << "-" << e.len << ">" << e.b << endl;
     }
     printf("\n");
-    mat_sm = fillMatrixByEdges(edges);
-    print_matrix(mat_sm);
+    printf("Матрица расстояний:\n");
+    Methods::print_matrix(graph.getPathMatrix());
+    auto mat_fl = graph.getFloydMatrix();
+    printf("\nМатрица Флойда:\n");
+    Methods::print_matrix(mat_fl);
+    printf("\nЦентр в вершине: ");
+    cout << graph.findCenter();
     printf("\n");
-    print_matrix(Floyd_Warshall(mat_sm));
     system("pause");
     return 0;
 }
