@@ -1,5 +1,6 @@
 ﻿#include    <stdio.h>
 #include    <fstream>
+#include <iostream>
 
 using namespace std;
 
@@ -48,7 +49,7 @@ void decompress() {
 int main() {
     while (true) {
         printf("1 to compress\n2 to decompress\n");
-        scanf("%d", &op);
+        cin >> op;
         if (op == 1) compress();
         else decompress();
     }
