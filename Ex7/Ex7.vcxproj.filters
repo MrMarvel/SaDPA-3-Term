@@ -15,13 +15,8 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Ex6.cpp">
+    <ClCompile Include="Ex7.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="input.txt">
-      <Filter>Файлы ресурсов</Filter>
-    </Text>
   </ItemGroup>
 </Project>
