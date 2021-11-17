@@ -8,6 +8,7 @@
 #include "RLE.cpp"
 #include "LZ77.cpp"
 #include "LZ78.h"
+#include "Shen.h"
 
 using namespace std;
 
@@ -84,6 +85,52 @@ void ex2() {
     }
 }
 
+void ex3() {
+    constexpr int num = 3;
+    int op;
+    ofstream fout;
+    ifstream fin;
+    stringstream ss;
+    int met = 0;
+    printf("1 to Shen\n2 to Huffman\n");
+    cin >> met;
+    printf("1 to compress\n2 to decompress\n");
+    cin >> op;
+    if (op == 1) {
+        size_t uncompressed_size = 0;
+        size_t compressed_size = 0;
+        if (met == 1) {
+            shen::Shen::ShannonFanoZip(to_string(num) + "/input.txt");
+            fin.open(to_string(num) + "/input.txt");
+            fin.seekg(0, std::ios::end);
+            uncompressed_size = fin.tellg();
+            fin.close();
+            fin.open(to_string(num) + "/input.coded");
+            fin.seekg(0, std::ios::end);
+            compressed_size = fin.tellg();
+            fin.close();
+        } else {
+            shen::Shen::HuffmanZip(to_string(num) + "/input2.txt");
+            fin.open(to_string(num) + "/input2.txt");
+            fin.seekg(0, std::ios::end);
+            uncompressed_size = fin.tellg();
+            fin.close();
+            fin.open(to_string(num) + "/input2.coded");
+            fin.seekg(0, std::ios::end);
+            compressed_size = fin.tellg();
+            fin.close();
+        }
+        printf("Compression factor: %f\n", uncompressed_size * 1. / compressed_size);
+    } else {
+
+        if (met == 1) {
+            shen::Shen::ShannonFanoUnzip(to_string(num) + "/input.coded");
+        } else {
+            shen::Shen::HuffmanUnzip(to_string(num) + "/input2.coded");
+        }
+    }
+}
+
 int main() {
     setlocale(LC_ALL, "RUS");
     while (true) {
@@ -103,6 +150,7 @@ int main() {
                 break;
             }
             case 3: {
+                ex3();
                 break;
             }
         	default:

@@ -140,15 +140,28 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Ex7.cpp" />
+    <ClCompile Include="libs\BitIO.cpp" />
+    <ClCompile Include="libs\getopt.c" />
+    <ClCompile Include="libs\Huffman.cpp" />
+    <ClCompile Include="libs\ShannonFano.cpp" />
+    <ClCompile Include="libs\Utils.cpp" />
     <ClCompile Include="LZ77EXT.cpp" />
     <ClCompile Include="LZ77.cpp" />
     <ClCompile Include="LZ78.cpp" />
     <ClCompile Include="LZ78DEPR.cpp" />
     <ClCompile Include="RLE.cpp" />
+    <ClCompile Include="Shen.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="libs\BitIO.h" />
+    <ClInclude Include="libs\getopt.h" />
+    <ClInclude Include="libs\Huffman.h" />
+    <ClInclude Include="libs\Node.h" />
+    <ClInclude Include="libs\ShannonFano.h" />
+    <ClInclude Include="libs\Utils.h" />
     <ClInclude Include="LZ78.h" />
     <ClInclude Include="LZ78DEPR.h" />
+    <ClInclude Include="Shen.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

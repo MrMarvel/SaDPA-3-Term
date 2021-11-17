@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Исходные файлы\libs">
+      <UniqueIdentifier>{8fdf3034-8a8e-4f71-86b7-c64a5ab0019d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Ex7.cpp">
@@ -33,13 +36,52 @@
     <ClCompile Include="LZ78.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="Shen.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="libs\BitIO.cpp">
+      <Filter>Исходные файлы\libs</Filter>
+    </ClCompile>
+    <ClCompile Include="libs\getopt.c">
+      <Filter>Исходные файлы\libs</Filter>
+    </ClCompile>
+    <ClCompile Include="libs\Huffman.cpp">
+      <Filter>Исходные файлы\libs</Filter>
+    </ClCompile>
+    <ClCompile Include="libs\ShannonFano.cpp">
+      <Filter>Исходные файлы\libs</Filter>
+    </ClCompile>
+    <ClCompile Include="libs\Utils.cpp">
+      <Filter>Исходные файлы\libs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LZ78DEPR.h">
       <Filter>Исходные файлы</Filter>
     </ClInclude>
     <ClInclude Include="LZ78.h">
-      <Filter>Исходные файлы</Filter>
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Shen.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="libs\BitIO.h">
+      <Filter>Исходные файлы\libs</Filter>
+    </ClInclude>
+    <ClInclude Include="libs\getopt.h">
+      <Filter>Исходные файлы\libs</Filter>
+    </ClInclude>
+    <ClInclude Include="libs\Huffman.h">
+      <Filter>Исходные файлы\libs</Filter>
+    </ClInclude>
+    <ClInclude Include="libs\ShannonFano.h">
+      <Filter>Исходные файлы\libs</Filter>
+    </ClInclude>
+    <ClInclude Include="libs\Utils.h">
+      <Filter>Исходные файлы\libs</Filter>
+    </ClInclude>
+    <ClInclude Include="libs\Node.h">
+      <Filter>Исходные файлы\libs</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
