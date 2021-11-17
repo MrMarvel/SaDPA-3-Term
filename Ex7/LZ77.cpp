@@ -93,8 +93,8 @@ namespace lz77 {
 			}
 		}
 
-		for (const auto& i : vt) { // Результат кодирования 
-			out << "(" << i.off << " " << i.len << " " << i.next_char << ")";
+		for (const auto& i : vt) { // Результат кодирования
+			out << "(" << to_string(i.off) << " " << to_string(i.len) << " " << i.next_char << ")";
 		}
 		printf("\n");
         printf("Complete!\n");
