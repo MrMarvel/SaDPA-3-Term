@@ -162,15 +162,19 @@ private:
     void    print_shortest() {
         std::cout << std::endl;
         size_t size = shortest_path_.size();
+        //size_t pathLength = 0;
         cout << "Shortest path:"<< endl;
         for (size_t i = 0; i < size; i++) {
             auto town = shortest_path_[i];
             std::cout << town + 1;
             if (i != size-1) cout << "->";
+            if (i == 0) continue;
+            //auto lastTown = shortest_path_[i-1];
+            //pathLength += dist_matr_[lastTown][town];
         }//for
 
         std::cout << std::endl;
-        cout << "Shortest path length: " << shortest_path_len_ << endl;
+        printf("Shortest path length: %d\n", shortest_path_len_);
     }
     //-------------------------------------------------------------------------
 };
@@ -178,7 +182,7 @@ private:
 int     main() {
     std::ios::sync_with_stdio(false);
     int     towns_total{};
-    shared_ptr<ifstream> fin = shared_ptr<ifstream>(new ifstream("input.txt"));
+    shared_ptr<ifstream> fin = shared_ptr<ifstream>(new ifstream("input2.txt"));
     istream& in = *fin;
     do {
         std::cout << "Towns total (>= 2): ";

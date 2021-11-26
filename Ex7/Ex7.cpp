@@ -60,6 +60,7 @@ void ex2() {
             fout.open(to_string(num) + "/output.txt");
             lz77::compress(fin, ss);
             fout << ss.str();
+            fout.flush();
         } else {
             lz78::_tmain(to_string(num) + "/input2.txt", to_string(num) + "/output.txt", 1);
         }
@@ -130,7 +131,7 @@ void ex3() {
         }
     }
 }
-
+//Вариант 17
 int main() {
     setlocale(LC_ALL, "RUS");
     while (true) {
