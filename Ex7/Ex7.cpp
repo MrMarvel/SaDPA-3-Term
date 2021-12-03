@@ -12,9 +12,7 @@
 
 using namespace std;
 
-
-
-void ex1() {
+void ex1p1() {
     constexpr int num = 1;
     int op;
     ofstream fout;
@@ -31,7 +29,8 @@ void ex1() {
         size_t uncompressed_size = fin.tellg();
         size_t compressed_size = ss.str().length();
         printf("Compression factor: %f\n", uncompressed_size * 1. / compressed_size);
-    } else {
+    }
+    else {
         fin.open(to_string(num) + "/output.txt");
         fout.open(to_string(num) + "/output2.txt");
 
@@ -41,6 +40,45 @@ void ex1() {
     fin.close();
     fout.close();
     ss.str("");
+}
+
+void ex1p2() {
+    constexpr int num = 1;
+    int op;
+    ofstream fout;
+    ifstream fin;
+    stringstream ss;
+    printf("1 to compress\n2 to decompress\n");
+    cin >> op;
+    if (op == 1) {
+        fin.open(to_string(num) + "/inputG.txt");
+        fout.open(to_string(num) + "/outputG.txt");
+        rle::compress(fin, ss, true);
+        fout << ss.str();
+        fin.seekg(0, std::ios::end);
+        size_t uncompressed_size = fin.tellg();
+        size_t compressed_size = ss.str().length();
+        printf("Compression factor: %f\n", uncompressed_size * 1. / compressed_size);
+    }
+    else {
+        fin.open(to_string(num) + "/outputG.txt");
+        fout.open(to_string(num) + "/outputG2.txt");
+
+        rle::decompress(fin, ss);
+        fout << ss.str();
+    }
+    fin.close();
+    fout.close();
+    ss.str("");
+}
+
+void ex1() {
+    int p = 0;
+    printf("1 to default RLE\n2 to group RLE\n");
+    cin >> p;
+    if (p == 2) ex1p2();
+    else ex1p1();
+
 }
 
 void ex2() {
