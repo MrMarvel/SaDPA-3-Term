@@ -8,31 +8,39 @@ namespace rle {
 
     void static compress(istream& in, ostream& out, bool grouping = false) {
         printf("Compressing...\n");
-        bool isUniquePrev = true;
+        bool isUniquePrev = false;
         bool isUnique = isUniquePrev;
+        int col = 0;
         vector<char> chars;
         for (; !in.eof(); isUniquePrev = isUnique) {
 	        const char ch = in.get();
             chars.push_back(ch);
+            col++;
             if (ch != in.peek()) {//UNIQUE
                 isUnique = true;
                 if (!grouping) {
-                    out << chars.size() << string(chars.data(), chars.size());
+                    out << col << string(chars.data(), chars.size());
                     chars.clear();
+                    col = 0;
                     continue;
                 }
                 if (!isUniquePrev) {
-                    out << chars.size() << string(chars.data(), chars.size());
+                    out << col << string(chars.data(), chars.size());
                     chars.clear();
+                    col = 0;
                 }
                 continue;
             } else {//NOT UNIQUE
                 isUnique = false;
-                if (!grouping) continue;
+                if (!grouping) {
+                    chars.clear();
+                    continue;
+                }
                 if (isUniquePrev) {
                     if (grouping) out << "-";
-                    out << chars.size() << string(chars.data(), chars.size());
+                    out << col << string(chars.data(), chars.size());
                     chars.clear();
+                    col = 0;
                 }
                 continue;
             }
@@ -40,8 +48,9 @@ namespace rle {
                 if (isUniquePrev) {
                     out << "-";
                 }
-                out << chars.size() << string(chars.data(), chars.size());
+                out << col << string(chars.data(), chars.size());
                 chars.clear();
+                col = 0;
                 continue;
             }
         }
@@ -49,8 +58,9 @@ namespace rle {
             if (isUnique) {
                 out << "-";
             }
-            out << chars.size() << string(chars.data(), chars.size());
+            out << col << string(chars.data(), chars.size());
             chars.clear();
+            col = 0;
         }
         printf("Complete!\n");
     }
